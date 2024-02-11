@@ -1,0 +1,12 @@
+{
+  "name": "pand-backend",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {},
+  "keywords": [
+    "pand"
+  ],
+  "author": "Yasin Silavi",
+  "license": "ISC"
+}
