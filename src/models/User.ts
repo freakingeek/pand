@@ -22,6 +22,7 @@ const userSchema = new Schema<UserDocument>({
   username: {
     type: String,
     unique: true,
+    sparse: true,
   },
   password: {
     type: String,
