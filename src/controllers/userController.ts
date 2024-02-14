@@ -1,4 +1,5 @@
 import { ZodError } from "zod";
+import { ClientError } from "@/utils/error";
 import * as response from "@/utils/response";
 import type { Request, Response } from "express";
 import * as userService from "@/services/userService";
@@ -23,6 +24,22 @@ export async function createNewUser(req: Request, res: Response) {
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({ error: "یه جای کار می‌لنگه ...", errors: error.errors });
+    }
+
+    console.error("Error creating new user:", error);
+    res.status(500).json({ error: "این بار واقعا از بک‌انده!" });
+  }
+}
+
+export async function verifyNewUser(req: Request, res: Response) {
+  try {
+    const { token } = req.params;
+    const user = await userService.verifyNewUser(token);
+
+    res.json(user);
+  } catch (error) {
+    if (error instanceof ClientError) {
+      return res.status(error.statusCode).json({ error: error.message });
     }
 
     console.error("Error creating new user:", error);

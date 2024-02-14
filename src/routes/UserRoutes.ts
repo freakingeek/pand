@@ -9,6 +9,6 @@ router.post("/", userController.createNewUser);
 // router.delete('/', userController.createUser);
 // router.get('/:id', userController.getUserById);
 
-// router.get('/verify/:token', userController.verifyUser);
+router.get('/verify/:token', userController.verifyNewUser);
 
 export default router;
