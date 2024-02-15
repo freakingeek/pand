@@ -2,6 +2,7 @@ import { randomUUID } from "crypto";
 import { ClientError } from "@/utils/error";
 import { sendVerificationEmail } from "@/emails";
 import User, { type UserDocument } from "@/models/User";
+import { generateAccessToken, generateRefreshToken } from "@/utils/verification";
 
 export async function getAllUsers(): Promise<UserDocument[]> {
   return User.find();
@@ -21,7 +22,7 @@ export async function createNewUser(userData: Partial<UserDocument>): Promise<Us
   return user;
 }
 
-export async function verifyNewUser(verificationToken: string): Promise<UserDocument> {
+export async function verifyNewUser(verificationToken: string) {
   const updatedUser = await User.findOneAndUpdate(
     { verificationToken, verified: false },
     { verified: true },
@@ -35,5 +36,11 @@ export async function verifyNewUser(verificationToken: string): Promise<UserDocu
     );
   }
 
-  return updatedUser;
+  return {
+    user: updatedUser,
+    tokens: {
+      accessToken: generateAccessToken(updatedUser),
+      refreshToken: generateRefreshToken(updatedUser),
+    },
+  };
 }

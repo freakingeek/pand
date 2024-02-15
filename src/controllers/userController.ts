@@ -33,16 +33,26 @@ export async function createNewUser(req: Request, res: Response) {
 
 export async function verifyNewUser(req: Request, res: Response) {
   try {
-    const { token } = req.params;
-    const user = await userService.verifyNewUser(token);
-
-    res.json(user);
+    const userWithToken = await userService.verifyNewUser(req.params.token);
+    res.json(response.success(userWithToken));
   } catch (error) {
     if (error instanceof ClientError) {
       return res.status(error.statusCode).json({ error: error.message });
     }
 
     console.error("Error creating new user:", error);
+    res.status(500).json({ error: "این بار واقعا از بک‌انده!" });
+  }
+}
+
+export async function updateUserProfile(req: Request, res: Response) {
+  try {
+  } catch (error) {
+    if (error instanceof ClientError) {
+      return res.status(error.statusCode).json({ error: error.message });
+    }
+
+    console.error("Error updating user profile:", error);
     res.status(500).json({ error: "این بار واقعا از بک‌انده!" });
   }
 }
