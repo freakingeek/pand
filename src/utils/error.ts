@@ -1,4 +1,4 @@
-type CLIENT_HTTP_ERROR_STATUS_CODES = 400;
+type CLIENT_HTTP_ERROR_STATUS_CODES = 400 | 401 | 403;
 
 export class ClientError extends Error {
   statusCode: CLIENT_HTTP_ERROR_STATUS_CODES;
