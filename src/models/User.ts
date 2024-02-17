@@ -38,12 +38,14 @@ const userSchema = new Schema<UserDocument>({
 
 userSchema.set("timestamps", true);
 
-// userSchema.set('toJSON', {
-//   transform: (_, ret) => {
-//     const { password, verificationToken, __v, ...rest } = ret;
+userSchema.set("toJSON", {
+  virtuals: true,
+  versionKey: false,
+  transform: (_, ret) => {
+    const { password, verificationToken, _id, ...rest } = ret;
 
-//     return rest;
-//   },
-// });
+    return rest;
+  },
+});
 
 export default mongoose.model<UserDocument>("User", userSchema);
