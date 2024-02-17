@@ -2,8 +2,11 @@
   "name": "pand-backend",
   "version": "0.1.0",
   "description": "",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
+    "start": "bun ./dist/index.js",
+    "build": "bun build ./src/index.ts --outdir ./dist --target bun",
     "dev": "bun --watch ./src/index.ts"
   },
   "keywords": [
