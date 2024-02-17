@@ -1,7 +1,7 @@
+import User from "@/models/User";
 import { randomUUID } from "crypto";
 import { ClientError } from "@/utils/error";
 import { sendVerificationEmail } from "@/emails";
-import User, { type UserDocument } from "@/models/User";
 import { generateAccessToken, generateRefreshToken } from "@/utils/verification";
 
 export async function register(userData: { email: string }) {
